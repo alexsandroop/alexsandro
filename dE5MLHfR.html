@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações da Igreja</title>
+    <style>
+        /* Reset de margens e padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilo do corpo */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            height: 100vh; /* Tela cheia */
+            display: flex;
+            flex-direction: column; /* Organiza em coluna */
+            align-items: center; /* Centraliza horizontalmente */
+            justify-content: center; /* Centraliza verticalmente */
+        }
+
+        /* Container para centralizar tudo */
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        /* Estilo da logo */
+        .logo {
+            margin: 20px 0;
+            max-width: 100%; /* Responsivo */
+            height: auto;
+        }
+
+        /* Estilo dos versículos */
+        .verse {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        /* Informações da igreja */
+        .church-info {
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .church-info.small {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Botões */
+        .share-buttons {
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 1rem;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            color: white;
+            background-color: #007bff;
+        }
+
+        button:active {
+            background-color: #0056b3;
+        }
+
+        /* Botão para visitar a igreja */
+        a.visit {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        a.visit:active {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Versículo aleatório -->
+        <div class="verse" id="bibleVerse"></div>
+
+        <!-- Botões de Compartilhamento e Cópia -->
+        <div class="share-buttons">
+            <button onclick="shareVerse()">Compartilhar</button>
+            <button onclick="copyVerse()">Copiar Versículo</button>
+        </div>
+
+        <!-- Botão para visitar a igreja -->
+        <a class="visit" href="https://goo.gl/maps/dP2sLxFb1HqZBjAs9" target="_blank">
+            Venha nos visitar!
+        </a>
+
+        <!-- Informações da Igreja -->
+        <footer class="church-info">
+            Assembleia de Deus Min. Belém
+        </footer>
+
+        <footer class="church-info small">
+            R. Adélia Abib - Conj. Res. Parque São Bento, Campinas - SP, 13058-153
+        </footer>
+    </div>
+
+    <!-- Logo da Igreja -->
+    <img src="dd.png" alt="IPR Logo" class="logo" id="churchLogo">
+
+    <script>
+        // Lista de versículos NVI
+        const verses = [
+            "Deleite-se no Senhor, e ele atenderá aos desejos do seu coração. - Salmos 37:4",
+            "O Senhor é o meu pastor; de nada terei falta. - Salmos 23:1",
+            "Tudo posso naquele que me fortalece. - Filipenses 4:13",
+            "Porque Deus tanto amou o mundo que deu o seu Filho Unigênito, para que todo o que nele crer não pereça, mas tenha a vida eterna. - João 3:16",
+            "Bem-aventurados os que têm fome e sede de justiça, pois serão satisfeitos. - Mateus 5:6",
+            "Por isso não tema, pois eu estou com você; não tenha medo, pois eu sou o seu Deus. - Isaías 41:10",
+            "Mas aqueles que esperam no Senhor renovam as suas forças. - Isaías 40:31",
+            "Clame a mim e eu responderei, e direi a você coisas grandiosas e insondáveis que você não conhece. - Jeremias 33:3",
+            "O choro pode durar uma noite, mas a alegria vem pela manhã. - Salmos 30:5",
+            "Se Deus é por nós, quem será contra nós? - Romanos 8:31",
+            "Confie no Senhor de todo o seu coração e não se apoie em seu próprio entendimento. - Provérbios 3:5",
+            "Ame o Senhor, o seu Deus, de todo o seu coração, de toda a sua alma e de todas as suas forças. - Deuteronômio 6:5",
+            "Alegrem-se na esperança, sejam pacientes na tribulação, perseverem na oração. - Romanos 12:12",
+            "Bem-aventurados os pacificadores, pois serão chamados filhos de Deus. - Mateus 5:9",
+            "A tua palavra é lâmpada que ilumina os meus passos e luz que clareia o meu caminho. - Salmos 119:105"
+        ];
+
+        // Seleciona um versículo aleatório
+        const randomVerse = verses[Math.floor(Math.random() * verses.length)];
+
+        // Exibe o versículo na página
+        document.getElementById("bibleVerse").textContent = randomVerse;
+
+        // Função para compartilhar o versículo
+        function shareVerse() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Versículo do Dia',
+                    text: randomVerse,
+                    url: window.location.href
+                }).then(() => {
+                    alert('Versículo compartilhado com sucesso!');
+                }).catch((error) => {
+                    console.error('Erro ao compartilhar:', error);
+                });
+            } else {
+                alert('O compartilhamento não é suportado neste navegador.');
+            }
+        }
+
+        // Função para copiar o versículo para a área de transferência
+        function copyVerse() {
+            navigator.clipboard.writeText(randomVerse).then(() => {
+                alert('Versículo copiado para a área de transferência!');
+            }).catch((error) => {
+                console.error('Erro ao copiar:', error);
+            });
+        }
+    </script>
+</body>
+</html>
