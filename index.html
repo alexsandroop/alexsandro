@@ -1,52 +1,46 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informações da Igreja</title>
     <style>
-        /* Reset de margens e padding */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Estilo do corpo */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #000;
             color: #fff;
-            height: 100vh; /* Tela cheia */
+            height: 100vh;
             display: flex;
-            flex-direction: column; /* Organiza em coluna */
-            align-items: center; /* Centraliza horizontalmente */
-            justify-content: center; /* Centraliza verticalmente */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Container para centralizar tudo */
         .container {
             text-align: center;
             max-width: 600px;
             padding: 20px;
         }
 
-        /* Estilo da logo */
         .logo {
             margin: 20px 0;
-            max-width: 100%; /* Responsivo */
+            max-width: 100%;
             height: auto;
         }
 
-        /* Estilo dos versículos */
         .verse {
             font-size: 1.4rem;
             margin-bottom: 15px;
             line-height: 1.6;
         }
 
-        /* Informações da igreja */
         .church-info {
             font-size: 1.1rem;
             margin-top: 10px;
@@ -57,7 +51,19 @@
             opacity: 0.7;
         }
 
-        /* Botões */
+        .schedule {
+            margin: 20px 0;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .schedule h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: #28a745;
+        }
+
         .share-buttons {
             margin-top: 10px;
         }
@@ -77,7 +83,6 @@
             background-color: #0056b3;
         }
 
-        /* Botão para visitar a igreja */
         a.visit {
             display: inline-block;
             margin-top: 10px;
@@ -106,7 +111,7 @@
         </div>
 
         <!-- Botão para visitar a igreja -->
-        <a class="visit" href="https://goo.gl/maps/dP2sLxFb1HqZBjAs9" target="_blank">
+        <a class="visit" href="https://www.google.com/maps/search/?api=1&query=R.+Ad%C3%A9lia+Abib+-+Conj.+Res.+Parque+Sao+Bento,+Campinas+-+SP,+13058-153" target="_blank">
             Venha nos visitar!
         </a>
 
@@ -118,13 +123,23 @@
         <footer class="church-info small">
             R. Adélia Abib - Conj. Res. Parque São Bento, Campinas - SP, 13058-153
         </footer>
+
+        <!-- Calendário dos Cultos -->
+        <div class="schedule">
+            <h2>Calendário dos Cultos da Semana</h2>
+            <p>🕒 <strong>Quinta-feira:</strong> 19:30–21:00 | 18:00–23:00 (Culto da Família)</p>
+            <p>🕒 <strong>Sábado:</strong> 19:00–21:00 (Culto)</p>
+            <p>🕒 <strong>Domingo:</strong> 18:00–21:00 (Culto)</p>
+            <p>🕒 <strong>Terça-feira:</strong> 19:30–21:00 (Culto de Ensino)</p>
+            <p>🕒 <strong>Primeiro sábado do mês:</strong> 18:30–21:00 (Santa Ceia)</p>
+            <p>🕒 <strong>Domingo de manhã:</strong> 09:30–10:30 (EBD - Escola Bíblica Dominical)</p>
+        </div>
     </div>
 
     <!-- Logo da Igreja -->
     <img src="dd.png" alt="IPR Logo" class="logo" id="churchLogo">
 
     <script>
-        // Lista de versículos NVI
         const verses = [
             "Deleite-se no Senhor, e ele atenderá aos desejos do seu coração. - Salmos 37:4",
             "O Senhor é o meu pastor; de nada terei falta. - Salmos 23:1",
@@ -143,37 +158,28 @@
             "A tua palavra é lâmpada que ilumina os meus passos e luz que clareia o meu caminho. - Salmos 119:105"
         ];
 
-        // Seleciona um versículo aleatório
         const randomVerse = verses[Math.floor(Math.random() * verses.length)];
-
-        // Exibe o versículo na página
         document.getElementById("bibleVerse").textContent = randomVerse;
 
-        // Função para compartilhar o versículo
         function shareVerse() {
             if (navigator.share) {
                 navigator.share({
                     title: 'Versículo do Dia',
                     text: randomVerse,
                     url: window.location.href
-                }).then(() => {
-                    alert('Versículo compartilhado com sucesso!');
-                }).catch((error) => {
-                    console.error('Erro ao compartilhar:', error);
-                });
+                }).then(() => alert('Versículo compartilhado!'))
+                .catch(error => console.error('Erro ao compartilhar:', error));
             } else {
-                alert('O compartilhamento não é suportado neste navegador.');
+                alert('Compartilhamento não suportado neste navegador.');
             }
         }
 
-        // Função para copiar o versículo para a área de transferência
         function copyVerse() {
             navigator.clipboard.writeText(randomVerse).then(() => {
-                alert('Versículo copiado para a área de transferência!');
-            }).catch((error) => {
-                console.error('Erro ao copiar:', error);
-            });
+                alert('Versículo copiado!');
+            }).catch(error => console.error('Erro ao copiar:', error));
         }
     </script>
 </body>
 </html>
+
