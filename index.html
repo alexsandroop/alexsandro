@@ -111,7 +111,7 @@
             background-color: #0056b3;
         }
 
-        a.visit {
+        a.visit, a.access {
             display: inline-block;
             margin-top: 10px;
             padding: 8px 12px;
@@ -122,7 +122,7 @@
             border-radius: 5px;
         }
 
-        a.visit:active {
+        a.visit:active, a.access:active {
             background-color: #218838;
         }
 
@@ -148,6 +148,11 @@
         <!-- Botão para visitar a igreja -->
         <a class="visit" href="https://www.google.com/maps/search/?api=1&query=R.+Ad%C3%A9lia+Abib,+12+-+Conj.+Res.+Parque+Sao+Bento,+Campinas+-+SP,+13058-153" target="_blank">
             Venha nos visitar!
+        </a>
+
+        <!-- Botão para acessar página de contribuição -->
+        <a class="access" href="https://seusite.com/contribuicoes" target="_blank">
+            Contribua com a Igreja
         </a>
 
         <!-- Informações da Igreja -->
@@ -176,52 +181,33 @@
 
     <script>
         const verses = [
-    "Porque eu bem sei os planos que tenho para você, diz o Senhor, planos de fazê-los prosperar e não de causar dano, planos de dar a vocês esperança e um futuro. - Jeremias 29:11",
-    "Venham a mim, todos os que estão cansados e sobrecarregados, e eu darei descanso a vocês. - Mateus 11:28",
-    "Deixe todas as suas preocupações com ele, pois ele cuida de você. - 1 Pedro 5:7",
-    "O Senhor está perto dos que têm o coração quebrantado e salva os de espírito abatido. - Salmos 34:18",
-    "Eu sou a luz do mundo. Quem me segue nunca andará em trevas, mas terá a luz da vida. - João 8:12",
-    "Jesus respondeu: Eu sou o caminho, a verdade e a vida. Ninguém vem ao Pai, a não ser por mim. - João 14:6",
-    "Deus é o nosso refúgio e a nossa fortaleza, auxílio sempre presente na adversidade. - Salmos 46:1",
-    "Aquele que habita no abrigo do Altíssimo e descansa à sombra do Todo-Poderoso pode dizer ao Senhor: Tu és o meu refúgio e a minha fortaleza, o meu Deus, em quem confio. - Salmos 91:1-2",
-    "Busquem, pois, em primeiro lugar o Reino de Deus e a sua justiça, e todas essas coisas lhes serão acrescentadas. - Mateus 6:33",
-    "Eu lhes darei um novo coração e porei um espírito novo em vocês; tirarei de vocês o coração de pedra e lhes darei um coração de carne. - Ezequiel 36:26",
-    "Clame a mim e eu responderei, e direi a você coisas grandiosas e insondáveis que você não conhece. - Jeremias 33:3",
-    "O choro pode durar uma noite, mas a alegria vem pela manhã. - Salmos 30:5",
-    "Se confessarmos os nossos pecados, ele é fiel e justo para perdoar os nossos pecados e nos purificar de toda injustiça. - 1 João 1:9",
-    "Assim, se o Filho os libertar, vocês de fato serão livres. - João 8:36",
-    "E o meu Deus suprirá todas as necessidades de vocês, de acordo com as suas gloriosas riquezas em Cristo Jesus. - Filipenses 4:19",
-    "Confie no Senhor de todo o seu coração e não se apoie em seu próprio entendimento. - Provérbios 3:5",
-    "O Senhor é o meu pastor; de nada terei falta. - Salmos 23:1",
-    "Tudo posso naquele que me fortalece. - Filipenses 4:13",
-    "Aqueles que esperam no Senhor renovarão as suas forças. Voam alto como águias; correm e não ficam exaustos, andam e não se cansam. - Isaías 40:31",
-    "Não fui eu que lhe ordenei? Seja forte e corajoso! Não se apavore nem desanime, pois o Senhor, o seu Deus, estará com você por onde você andar. - Josué 1:9"
-];
-
+            "Porque eu bem sei os planos que tenho para você, diz o Senhor, planos de fazê-los prosperar e não de causar dano, planos de dar a vocês esperança e um futuro. - Jeremias 29:11",
+            "Venham a mim, todos os que estão cansados e sobrecarregados, e eu darei descanso a vocês. - Mateus 11:28",
+            "Deixe todas as suas preocupações com ele, pois ele cuida de você. - 1 Pedro 5:7",
+            "O Senhor está perto dos que têm o coração quebrantado e salva os de espírito abatido. - Salmos 34:18",
+            "Eu sou a luz do mundo. Quem me segue nunca andará em trevas, mas terá a luz da vida. - João 8:12",
+            "Jesus respondeu: Eu sou o caminho, a verdade e a vida. Ninguém vem ao Pai, a não ser por mim. - João 14:6",
+            "Deus é o nosso refúgio e a nossa fortaleza, auxílio sempre presente na adversidade. - Salmos 46:1",
+            "Aquele que habita no abrigo do Altíssimo e descansa à sombra do Todo-Poderoso pode dizer ao Senhor: Tu és o meu refúgio e a minha fortaleza, o meu Deus, em quem confio. - Salmos 91:1-2",
+            "Busquem, pois, em primeiro lugar o Reino de Deus e a sua justiça, e todas essas coisas lhes serão acrescentadas. - Mateus 6:33",
+            "Eu lhes darei um novo coração e porei um espírito novo em vocês; tirarei de vocês o coração de pedra e lhes darei um coração de carne. - Ezequiel 36:26",
+            "Clame a mim e eu responderei, e direi a você coisas grandiosas e insondáveis que você não conhece. - Jeremias 33:3",
+            "O choro pode durar uma noite, mas a alegria vem pela manhã. - Salmos 30:5",
+            "Se confessarmos os nossos pecados, ele é fiel e justo para perdoar os nossos pecados e nos purificar de toda injustiça. - 1 João 1:9",
+            "Assim, se o Filho os libertar, vocês de fato serão livres. - João 8:36",
+            "E o meu Deus suprirá todas as necessidades de vocês, de acordo com as suas gloriosas riquezas em Cristo Jesus. - Filipenses 4:19",
+            "Confie no Senhor de todo o seu coração e não se apoie em seu próprio entendimento. - Provérbios 3:5",
+            "O Senhor é o meu pastor; de nada terei falta. - Salmos 23:1",
+            "Tudo posso naquele que me fortalece. - Filipenses 4:13",
+            "Aqueles que esperam no Senhor renovarão as suas forças. Voam alto como águias; correm e não ficam exaustos, andam e não se cansam. - Isaías 40:31",
+            "Não fui eu que lhe ordenei? Seja forte e corajoso! Não se apavore nem desanime, pois o Senhor, o seu Deus, estará com você por onde você andar. - Josué 1:9"
+        ];
 
         const randomVerse = verses[Math.floor(Math.random() * verses.length)];
         document.getElementById("bibleVerse").textContent = randomVerse;
 
         function shareVerse() {
-            const customMessage = `${randomVerse}\n\n📍 Assembleia de Deus Min. Belém\n💬 "Venha nos visitar e receba uma palavra de esperança!"`;
+            const customMessage = `${randomVerse}\n\n\ud83d\udccd Assembleia de Deus Min. Belém\n\ud83d\udcac \"Venha nos visitar e receba uma palavra de esperança!\"`;
             if (navigator.share) {
                 navigator.share({
-                    title: 'Versículo do Dia ✨',
-                    text: customMessage,
-                    url: window.location.href
-                }).then(() => alert('Versículo compartilhado com sucesso!'))
-                .catch(error => console.error('Erro ao compartilhar:', error));
-            } else {
-                alert('Compartilhamento não suportado neste navegador.');
-            }
-        }
-
-        function copyVerse() {
-            navigator.clipboard.writeText(randomVerse).then(() => {
-                alert('Versículo copiado!');
-            }).catch(error => console.error('Erro ao copiar:', error));
-        }
-    </script>
-</body>
-</html>
-
+                    title: 'Versículo
