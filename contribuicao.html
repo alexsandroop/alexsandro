@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contribuição</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        select, button {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none;
+        }
+
+        select {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+
+        button:active {
+            background-color: #0056b3;
+        }
+
+        .pix {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #444;
+            border-radius: 5px;
+            color: #ffdd57;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contribua</h1>
+        <p>Selecione o tipo de contribuição:</p>
+        <select id="contribuicaoTipo">
+            <option value="">Escolha uma opção</option>
+            <option value="dizimoOferta">Dízimo/Oferta</option>
+            <option value="ofertaEBD">Oferta EBD</option>
+        </select>
+        <button onclick="copiarPix()">Copiar PIX</button>
+        <div id="pixInfo" class="pix" style="display: none;"></div>
+    </div>
+
+    <script>
+        const pixKeys = {
+            dizimoOferta: "PIX_DO_DIZIMO_OU_OFERTA",
+            ofertaEBD: "PIX_DA_OFERTA_EBD"
+        };
+
+        function copiarPix() {
+            const tipo = document.getElementById("contribuicaoTipo").value;
+            const pixInfo = document.getElementById("pixInfo");
+
+            if (!tipo) {
+                alert("Por favor, selecione uma opção de contribuição.");
+                return;
+            }
+
+            const pix = pixKeys[tipo];
+            pixInfo.textContent = `Chave PIX: ${pix}`;
+            pixInfo.style.display = "block";
+
+            navigator.clipboard.writeText(pix).then(() => {
+                alert("Chave PIX copiada!");
+            }).catch(error => {
+                console.error("Erro ao copiar PIX:", error);
+                alert("Não foi possível copiar o PIX.");
+            });
+        }
+    </script>
+</body>
+</html>
