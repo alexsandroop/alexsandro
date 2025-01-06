@@ -7,97 +7,143 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
             text-align: center;
             padding: 20px;
         }
 
         .container {
-            background: #333;
+            max-width: 600px;
+            margin: auto;
+            background: white;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        select, button {
-            padding: 10px;
-            margin: 10px 0;
+        .verse {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .instructions {
             font-size: 1rem;
-            border-radius: 5px;
-            border: none;
+            margin-bottom: 20px;
         }
 
-        select {
+        .contribution-options {
+            margin: 20px 0;
+        }
+
+        .contribution-options button {
+            display: block;
             width: 100%;
-            max-width: 300px;
-        }
-
-        button {
-            cursor: pointer;
-            background-color: #007bff;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #007BFF;
             color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
         }
 
-        button:active {
+        .contribution-options button:hover {
             background-color: #0056b3;
         }
 
-        .pix {
-            margin-top: 15px;
+        #pix-key-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #pix-key {
             padding: 10px;
-            background-color: #444;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            color: #ffdd57;
+            font-size: 1rem;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        #copy-btn {
+            padding: 10px 15px;
+            background-color: #25d366;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        #copy-btn:hover {
+            background-color: #1da851;
+        }
+
+        a.whatsapp-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #25d366;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            border-radius: 5px;
             font-weight: bold;
         }
+
+        a.whatsapp-link:hover {
+            background-color: #1da851;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+        }
     </style>
+    <script>
+        function showPixKey(key) {
+            const pixKeyContainer = document.getElementById('pix-key-container');
+            const pixKeyInput = document.getElementById('pix-key');
+            pixKeyContainer.style.display = 'block';
+            pixKeyInput.value = key;
+        }
+
+        function copyPixKey() {
+            const pixKeyInput = document.getElementById('pix-key');
+            pixKeyInput.select();
+            document.execCommand('copy');
+            alert('Chave PIX copiada: ' + pixKeyInput.value);
+        }
+    </script>
 </head>
 <body>
     <div class="container">
-        <h1>Contribua</h1>
-        <p>Selecione o tipo de contribuição:</p>
-        <select id="contribuicaoTipo">
-            <option value="">Escolha uma opção</option>
-            <option value="dizimoOferta">Dízimo/Oferta</option>
-            <option value="ofertaEBD">Oferta EBD</option>
-        </select>
-        <button onclick="copiarPix()">Copiar PIX</button>
-        <div id="pixInfo" class="pix" style="display: none;"></div>
+        <h1>Contribuição</h1>
+        <p class="verse">"Cada um contribua segundo propôs no seu coração; não com tristeza, ou por necessidade; porque Deus ama ao que dá com alegria." - <strong>2 Coríntios 9:7</strong></p>
+
+        <p class="instructions">Escolha uma forma de contribuição e copie a chave PIX para realizar sua doação:</p>
+
+        <div class="contribution-options">
+            <button onclick="showPixKey('chavepix1@exemplo.com')">Oferta/Dízimo</button>
+            <button onclick="showPixKey('chavepix2@exemplo.com')">Oferta EBD</button>
+        </div>
+
+        <div id="pix-key-container">
+            <input type="text" id="pix-key" readonly>
+            <button id="copy-btn" onclick="copyPixKey()">Copiar Chave PIX</button>
+        </div>
+
+        <p class="instructions">Após realizar sua contribuição, envie o comprovante para o WhatsApp do Pastor Vagner clicando no botão abaixo:</p>
+        <a class="whatsapp-link" href="https://wa.me/5519996280084" target="_blank">Enviar Comprovante no WhatsApp</a>
     </div>
 
-    <script>
-        const pixKeys = {
-            dizimoOferta: "PIX_DO_DIZIMO_OU_OFERTA",
-            ofertaEBD: "PIX_DA_OFERTA_EBD"
-        };
-
-        function copiarPix() {
-            const tipo = document.getElementById("contribuicaoTipo").value;
-            const pixInfo = document.getElementById("pixInfo");
-
-            if (!tipo) {
-                alert("Por favor, selecione uma opção de contribuição.");
-                return;
-            }
-
-            const pix = pixKeys[tipo];
-            pixInfo.textContent = `Chave PIX: ${pix}`;
-            pixInfo.style.display = "block";
-
-            navigator.clipboard.writeText(pix).then(() => {
-                alert("Chave PIX copiada!");
-            }).catch(error => {
-                console.error("Erro ao copiar PIX:", error);
-                alert("Não foi possível copiar o PIX.");
-            });
-        }
-    </script>
+    <footer>
+        Assembleia de Deus Min. Belém &bull; Campinas - SP
+    </footer>
 </body>
 </html>
