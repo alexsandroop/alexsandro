@@ -1,171 +1,317 @@
-<h2 style="margin-top:20px;color:#28a745;">
-    SETOR RESIDENCIAL SÃO BENTO
-</h2>
+<!DOCTYPE html>
 
-<div style="background:#222;padding:15px;border-radius:10px;margin-top:15px;max-width:600px;margin-left:auto;margin-right:auto;">
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <h3>Cadastro de Visitante</h3>
+<title>Cadastro de Visitantes</title>
 
-    <input type="text" id="nome" placeholder="Nome Completo"
-    style="width:100%;padding:10px;margin:5px 0;">
+<style>
 
-    <label>Cristão?</label>
-    <select id="cristao" style="width:100%;padding:10px;margin:5px 0;">
-        <option value="">Selecione</option>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#eef2f5;
+    padding:15px;
+    color:#333;
+}
+
+.container{
+    max-width:650px;
+    margin:auto;
+}
+
+.logo{
+    display:block;
+    margin:20px auto;
+    max-width:180px;
+    width:100%;
+    height:auto;
+}
+
+.card{
+    background:#fff;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#1b5e20;
+    margin-bottom:10px;
+}
+
+.subtitulo{
+    text-align:center;
+    color:#666;
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    margin-top:12px;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #d0d0d0;
+    border-radius:8px;
+    font-size:16px;
+}
+
+input:focus,
+select:focus{
+    outline:none;
+    border-color:#2e7d32;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    background:#25D366;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.info{
+    margin-top:20px;
+    text-align:center;
+    font-size:14px;
+    color:#666;
+}
+
+.campo-dinamico{
+    margin-top:10px;
+}
+
+@media(max-width:600px){
+
+    h1{
+        font-size:24px;
+    }
+
+    input,
+    select,
+    button{
+        font-size:16px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+```
+<img src="aa.png" alt="Logo da Igreja" class="logo">
+
+<div class="card">
+
+    <h1>SETOR RESIDENCIAL SÃO BENTO</h1>
+
+    <p class="subtitulo">
+        Cadastro de Visitantes
+    </p>
+
+    <label>Nome Completo *</label>
+    <input type="text" id="nome" required>
+
+    <label>É Cristão?</label>
+    <select id="cristao">
         <option>Sim</option>
         <option>Não</option>
     </select>
 
-    <input type="text" id="igreja"
-    placeholder="Igreja que congrega"
-    style="width:100%;padding:10px;margin:5px 0;">
+    <label>Igreja que Congrega</label>
+    <input type="text" id="igreja">
 
-    <label>Está com a família?</label>
-    <select id="familia"
-    onchange="mostrarFamilia()"
-    style="width:100%;padding:10px;margin:5px 0;">
+    <label>Está com a Família?</label>
+    <select id="familia" onchange="mostrarFamilia()">
         <option>Não</option>
         <option>Sim</option>
     </select>
 
     <div id="dadosFamilia" style="display:none;">
 
-        <input type="text"
-        id="esposo"
-        placeholder="Nome do esposo(a)"
-        style="width:100%;padding:10px;margin:5px 0;">
+        <label>Nome do Esposo(a)</label>
+        <input type="text" id="esposo">
 
-        <input type="number"
-        id="qtdFilhos"
-        min="0"
-        placeholder="Quantidade de filhos"
-        onchange="gerarFilhos()"
-        style="width:100%;padding:10px;margin:5px 0;">
+        <label>Quantidade de Filhos</label>
+        <input type="number" id="qtdFilhos"
+               min="0"
+               onchange="gerarFilhos()">
 
         <div id="filhosContainer"></div>
 
+        <label>Outros Acompanhantes
+        (Pais, Avós, Primos etc.)</label>
+
         <input type="number"
-        id="qtdOutros"
-        min="0"
-        placeholder="Outros acompanhantes (pais, avós, primos, etc.)"
-        onchange="gerarOutros()"
-        style="width:100%;padding:10px;margin:5px 0;">
+               id="qtdOutros"
+               min="0"
+               onchange="gerarOutros()">
 
         <div id="outrosContainer"></div>
 
     </div>
 
-    <button onclick="enviarWhatsApp()"
-    style="width:100%;padding:12px;background:#28a745;color:white;border:none;border-radius:5px;margin-top:10px;">
-        Enviar Cadastro
+    <button onclick="enviarWhatsApp()">
+        📲 Enviar Cadastro
     </button>
 
 </div>
 
+<div class="info">
+    Assembleia de Deus Min. Belém<br>
+    R. Adélia Abib, 12 - Parque São Bento<br>
+    Campinas - SP
+</div>
+```
+
+</div>
+
 <script>
-function mostrarFamilia() {
-    const familia = document.getElementById("familia").value;
+
+function mostrarFamilia(){
+
+    const familia =
+    document.getElementById("familia").value;
 
     document.getElementById("dadosFamilia").style.display =
-        familia === "Sim" ? "block" : "none";
+    familia === "Sim" ? "block" : "none";
 }
 
-function gerarFilhos() {
+function gerarFilhos(){
 
     const qtd =
-        parseInt(document.getElementById("qtdFilhos").value) || 0;
+    parseInt(document.getElementById("qtdFilhos").value) || 0;
 
     const container =
-        document.getElementById("filhosContainer");
+    document.getElementById("filhosContainer");
 
     container.innerHTML = "";
 
-    for(let i = 1; i <= qtd; i++) {
+    for(let i=1;i<=qtd;i++){
 
         container.innerHTML += `
-            <input
-            type="text"
-            class="filho"
-            placeholder="Nome do filho ${i}"
-            style="width:100%;padding:10px;margin:5px 0;">
+        <div class="campo-dinamico">
+            <label>Nome do Filho ${i}</label>
+            <input type="text" class="filho">
+        </div>
         `;
     }
 }
 
-function gerarOutros() {
+function gerarOutros(){
 
     const qtd =
-        parseInt(document.getElementById("qtdOutros").value) || 0;
+    parseInt(document.getElementById("qtdOutros").value) || 0;
 
     const container =
-        document.getElementById("outrosContainer");
+    document.getElementById("outrosContainer");
 
     container.innerHTML = "";
 
-    for(let i = 1; i <= qtd; i++) {
+    for(let i=1;i<=qtd;i++){
 
         container.innerHTML += `
-            <input
-            type="text"
-            class="outro"
-            placeholder="Nome do acompanhante ${i}"
-            style="width:100%;padding:10px;margin:5px 0;">
+        <div class="campo-dinamico">
+            <label>Nome do Acompanhante ${i}</label>
+            <input type="text" class="outro">
+        </div>
         `;
     }
 }
 
-function enviarWhatsApp() {
+function enviarWhatsApp(){
 
-    let mensagem = "📋 CADASTRO DE VISITANTE\n\n";
+    const nome =
+    document.getElementById("nome").value;
 
-    mensagem += "🏠 SETOR RESIDENCIAL SÃO BENTO\n\n";
+    if(nome.trim() === ""){
 
-    mensagem += "Nome: " +
-        document.getElementById("nome").value + "\n";
-
-    mensagem += "Cristão: " +
-        document.getElementById("cristao").value + "\n";
-
-    mensagem += "Igreja: " +
-        document.getElementById("igreja").value + "\n";
-
-    mensagem += "Com Família: " +
-        document.getElementById("familia").value + "\n";
-
-    if(document.getElementById("familia").value === "Sim") {
-
-        mensagem += "\nEsposo(a): " +
-            document.getElementById("esposo").value + "\n";
-
-        const filhos =
-            document.querySelectorAll(".filho");
-
-        if(filhos.length > 0) {
-            mensagem += "\nFILHOS:\n";
-
-            filhos.forEach((filho, index) => {
-                mensagem +=
-                    `${index + 1}. ${filho.value}\n`;
-            });
-        }
-
-        const outros =
-            document.querySelectorAll(".outro");
-
-        if(outros.length > 0) {
-            mensagem += "\nOUTROS ACOMPANHANTES:\n";
-
-            outros.forEach((outro, index) => {
-                mensagem +=
-                    `${index + 1}. ${outro.value}\n`;
-            });
-        }
+        alert("Preencha o nome do visitante.");
+        return;
     }
+
+    const data =
+    new Date().toLocaleDateString("pt-BR");
+
+    let msg = "";
+
+    msg += "📋 CADASTRO DE VISITANTE\n\n";
+
+    msg += "📅 Data: " + data + "\n\n";
+
+    msg += "🏠 SETOR RESIDENCIAL SÃO BENTO\n\n";
+
+    msg += "👤 Nome: " +
+    document.getElementById("nome").value + "\n";
+
+    msg += "✝️ Cristão: " +
+    document.getElementById("cristao").value + "\n";
+
+    msg += "⛪ Igreja: " +
+    document.getElementById("igreja").value + "\n";
+
+    msg += "👨‍👩‍👧 Família: " +
+    document.getElementById("familia").value + "\n";
+
+    if(document.getElementById("familia").value === "Sim"){
+
+        msg += "\n💍 Esposo(a): " +
+        document.getElementById("esposo").value + "\n";
+
+        document.querySelectorAll(".filho")
+        .forEach((filho,i)=>{
+            msg += "👶 Filho " +
+            (i+1) + ": " +
+            filho.value + "\n";
+        });
+
+        document.querySelectorAll(".outro")
+        .forEach((outro,i)=>{
+            msg += "👥 Acompanhante " +
+            (i+1) + ": " +
+            outro.value + "\n";
+        });
+    }
+
+    const numero = "5519989214931";
 
     window.open(
-        "https://wa.me/?text=" +
-        encodeURIComponent(mensagem),
+        "https://wa.me/" +
+        numero +
+        "?text=" +
+        encodeURIComponent(msg),
         "_blank"
     );
 }
+
 </script>
+
+</body>
+</html>
