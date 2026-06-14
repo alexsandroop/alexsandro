@@ -82,8 +82,8 @@ button{
     color:#fff;
 }
 
-.btn-whatsapp{
-    background:#25D366;
+.btn-reset{
+    background:#ff5722;
     color:#fff;
 }
 
@@ -159,8 +159,8 @@ button:hover{
 Copiar Cadastro
 </button>
 
-<button class="btn-whatsapp" onclick="abrirWhatsApp()">
-Abrir WhatsApp
+<button class="btn-reset" onclick="resetarFormulario()">
+Novo Cadastro
 </button>
 
 </div>
@@ -257,9 +257,14 @@ function copiarCadastro(){
     alert("Cadastro copiado com sucesso!");
 }
 
-function abrirWhatsApp(){
+function resetarFormulario(){
 
-    window.location.href = "https://wa.me/";
+    document.querySelectorAll("input").forEach(i => i.value = "");
+    document.querySelectorAll("select").forEach(s => s.value = "Não");
+
+    document.getElementById("dadosFamilia").style.display = "none";
+    document.getElementById("filhosContainer").innerHTML = "";
+    document.getElementById("outrosContainer").innerHTML = "";
 }
 
 </script>
