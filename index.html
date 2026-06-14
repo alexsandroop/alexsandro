@@ -69,14 +69,22 @@ input, select{
 button{
     width:100%;
     padding:15px;
-    margin-top:20px;
-    background:#25D366;
-    color:#fff;
+    margin-top:10px;
     border:none;
     border-radius:8px;
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
+}
+
+.btn-copiar{
+    background:#2196F3;
+    color:#fff;
+}
+
+.btn-whatsapp{
+    background:#25D366;
+    color:#fff;
 }
 
 button:hover{
@@ -147,7 +155,13 @@ button:hover{
 
 </div>
 
-<button onclick="enviarCadastro()">Enviar Cadastro</button>
+<button class="btn-copiar" onclick="copiarCadastro()">
+Copiar Cadastro
+</button>
+
+<button class="btn-whatsapp" onclick="abrirWhatsApp()">
+Abrir WhatsApp
+</button>
 
 </div>
 
@@ -194,14 +208,7 @@ function gerarOutros(){
     }
 }
 
-function enviarCadastro(){
-
-    const nome = document.getElementById("nome").value;
-
-    if(nome.trim() === ""){
-        alert("Preencha o nome");
-        return;
-    }
+function montarMensagem(){
 
     const agora = new Date();
     const dataHora =
@@ -212,9 +219,8 @@ function enviarCadastro(){
 
     msg += "CADASTRO DE VISITANTE\n\n";
     msg += "Data/Hora: " + dataHora + "\n\n";
-    msg += "Setor Residencial São Bento\n\n";
 
-    msg += "Nome: " + nome + "\n";
+    msg += "Nome: " + document.getElementById("nome").value + "\n";
     msg += "Cristão: " + document.getElementById("cristao").value + "\n";
     msg += "Congregação: " + document.getElementById("igreja").value + "\n";
     msg += "Primeira vez: " + document.getElementById("primeiraVez").value + "\n";
@@ -232,16 +238,28 @@ function enviarCadastro(){
         });
     }
 
-    // copia mensagem
+    return msg;
+}
+
+function copiarCadastro(){
+
+    const nome = document.getElementById("nome").value;
+
+    if(nome.trim() === ""){
+        alert("Preencha o nome");
+        return;
+    }
+
+    const msg = montarMensagem();
+
     navigator.clipboard.writeText(msg);
 
-    // abre grupo
-    window.open(
-        "https://chat.whatsapp.com/KDCkWr0uXkV8EEgHU7Y3xf",
-        "_blank"
-    );
+    alert("Cadastro copiado com sucesso!");
+}
 
-    alert("Cadastro copiado. Agora cole no grupo.");
+function abrirWhatsApp(){
+
+    window.open("https://web.whatsapp.com", "_blank");
 }
 
 </script>
