@@ -137,17 +137,17 @@ button:hover{
 <label>Nome do Esposo(a)</label>
 <input type="text" id="esposo">
 
-<label>Qtd Filhos</label>
+<label>Quantidade de Filhos</label>
 <input type="number" id="qtdFilhos" min="0" onchange="gerarFilhos()">
 <div id="filhosContainer"></div>
 
-<label>Qtd Acompanhantes</label>
+<label>Quantidade de Acompanhantes</label>
 <input type="number" id="qtdOutros" min="0" onchange="gerarOutros()">
 <div id="outrosContainer"></div>
 
 </div>
 
-<button onclick="enviarWhatsApp()">Enviar Cadastro</button>
+<button onclick="enviarCadastro()">Enviar Cadastro</button>
 
 </div>
 
@@ -194,7 +194,7 @@ function gerarOutros(){
     }
 }
 
-function enviarWhatsApp(){
+function enviarCadastro(){
 
     const nome = document.getElementById("nome").value;
 
@@ -212,6 +212,7 @@ function enviarWhatsApp(){
 
     msg += "CADASTRO DE VISITANTE\n\n";
     msg += "Data/Hora: " + dataHora + "\n\n";
+    msg += "Setor Residencial São Bento\n\n";
 
     msg += "Nome: " + nome + "\n";
     msg += "Cristão: " + document.getElementById("cristao").value + "\n";
@@ -231,21 +232,16 @@ function enviarWhatsApp(){
         });
     }
 
-    const numero = "5519989214931";
+    // copia mensagem
+    navigator.clipboard.writeText(msg);
 
-    // envia cadastro
+    // abre grupo
     window.open(
-        "https://wa.me/" + numero + "?text=" + encodeURIComponent(msg),
+        "https://chat.whatsapp.com/KDCkWr0uXkV8EEgHU7Y3xf",
         "_blank"
     );
 
-    // abre grupo correto
-    setTimeout(() => {
-        window.open(
-            "https://chat.whatsapp.com/KDCkWr0uXkV8EEgHU7Y3xf",
-            "_blank"
-        );
-    }, 2500);
+    alert("Cadastro copiado. Agora cole no grupo.");
 }
 
 </script>
