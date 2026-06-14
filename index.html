@@ -30,7 +30,6 @@ body{
     margin:20px auto;
     max-width:180px;
     width:100%;
-    height:auto;
 }
 
 .card{
@@ -59,8 +58,7 @@ label{
     font-weight:bold;
 }
 
-input,
-select{
+input, select{
     width:100%;
     padding:12px;
     border:1px solid #d0d0d0;
@@ -102,7 +100,7 @@ button:hover{
 
 <div class="container">
 
-<img src="aa.png" alt="Logo da Igreja" class="logo">
+<img src="aa.png" class="logo">
 
 <div class="card">
 
@@ -139,27 +137,22 @@ button:hover{
 <label>Nome do Esposo(a)</label>
 <input type="text" id="esposo">
 
-<label>Quantidade de Filhos</label>
+<label>Qtd Filhos</label>
 <input type="number" id="qtdFilhos" min="0" onchange="gerarFilhos()">
-
 <div id="filhosContainer"></div>
 
-<label>Quantidade de Outros Acompanhantes</label>
+<label>Qtd Acompanhantes</label>
 <input type="number" id="qtdOutros" min="0" onchange="gerarOutros()">
-
 <div id="outrosContainer"></div>
 
 </div>
 
-<button onclick="enviarWhatsApp()">
-Enviar Cadastro
-</button>
+<button onclick="enviarWhatsApp()">Enviar Cadastro</button>
 
 </div>
 
 <div class="info">
 Assembleia de Deus Ministério Belém<br>
-R. Adélia Abib, 12 - Parque São Bento<br>
 Campinas - SP
 </div>
 
@@ -168,38 +161,36 @@ Campinas - SP
 <script>
 
 function mostrarFamilia(){
-    const familia = document.getElementById("familia").value;
+    const v = document.getElementById("familia").value;
     document.getElementById("dadosFamilia").style.display =
-    familia === "Sim" ? "block" : "none";
+    v === "Sim" ? "block" : "none";
 }
 
 function gerarFilhos(){
-    const qtd = parseInt(document.getElementById("qtdFilhos").value) || 0;
-    const container = document.getElementById("filhosContainer");
-    container.innerHTML = "";
+    const qtd = document.getElementById("qtdFilhos").value || 0;
+    const c = document.getElementById("filhosContainer");
+    c.innerHTML = "";
 
     for(let i=1;i<=qtd;i++){
-        container.innerHTML += `
+        c.innerHTML += `
         <div class="campo-dinamico">
-            <label>Nome do Filho ${i}</label>
+            <label>Filho ${i}</label>
             <input type="text" class="filho">
-        </div>
-        `;
+        </div>`;
     }
 }
 
 function gerarOutros(){
-    const qtd = parseInt(document.getElementById("qtdOutros").value) || 0;
-    const container = document.getElementById("outrosContainer");
-    container.innerHTML = "";
+    const qtd = document.getElementById("qtdOutros").value || 0;
+    const c = document.getElementById("outrosContainer");
+    c.innerHTML = "";
 
     for(let i=1;i<=qtd;i++){
-        container.innerHTML += `
+        c.innerHTML += `
         <div class="campo-dinamico">
-            <label>Nome do Acompanhante ${i}</label>
+            <label>Acompanhante ${i}</label>
             <input type="text" class="outro">
-        </div>
-        `;
+        </div>`;
     }
 }
 
@@ -208,12 +199,11 @@ function enviarWhatsApp(){
     const nome = document.getElementById("nome").value;
 
     if(nome.trim() === ""){
-        alert("Preencha o nome do visitante.");
+        alert("Preencha o nome");
         return;
     }
 
     const agora = new Date();
-
     const dataHora =
         agora.toLocaleDateString("pt-BR") + " " +
         agora.toLocaleTimeString("pt-BR");
@@ -222,9 +212,8 @@ function enviarWhatsApp(){
 
     msg += "CADASTRO DE VISITANTE\n\n";
     msg += "Data/Hora: " + dataHora + "\n\n";
-    msg += "SETOR RESIDENCIAL SÃO BENTO\n\n";
 
-    msg += "Nome: " + document.getElementById("nome").value + "\n";
+    msg += "Nome: " + nome + "\n";
     msg += "Cristão: " + document.getElementById("cristao").value + "\n";
     msg += "Congregação: " + document.getElementById("igreja").value + "\n";
     msg += "Primeira vez: " + document.getElementById("primeiraVez").value + "\n";
@@ -244,17 +233,19 @@ function enviarWhatsApp(){
 
     const numero = "5519989214931";
 
+    // envia cadastro
     window.open(
         "https://wa.me/" + numero + "?text=" + encodeURIComponent(msg),
         "_blank"
     );
 
+    // abre grupo correto
     setTimeout(() => {
         window.open(
             "https://chat.whatsapp.com/KDCkWr0uXkV8EEgHU7Y3xf",
             "_blank"
         );
-    }, 3000);
+    }, 2500);
 }
 
 </script>
