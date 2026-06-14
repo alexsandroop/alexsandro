@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -8,7 +8,6 @@
 <title>Cadastro de Visitantes</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -16,7 +15,7 @@
 }
 
 body{
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     background:#eef2f5;
     padding:15px;
     color:#333;
@@ -39,7 +38,7 @@ body{
     background:#fff;
     border-radius:15px;
     padding:20px;
-    box-shadow:0 3px 12px rgba(0,0,0,0.1);
+    box-shadow:0 3px 12px rgba(0,0,0,.1);
 }
 
 h1{
@@ -70,18 +69,12 @@ select{
     font-size:16px;
 }
 
-input:focus,
-select:focus{
-    outline:none;
-    border-color:#2e7d32;
-}
-
 button{
     width:100%;
     padding:15px;
     margin-top:20px;
     background:#25D366;
-    color:white;
+    color:#fff;
     border:none;
     border-radius:8px;
     font-size:16px;
@@ -103,103 +96,82 @@ button:hover{
 .campo-dinamico{
     margin-top:10px;
 }
-
-@media(max-width:600px){
-
-    h1{
-        font-size:24px;
-    }
-
-    input,
-    select,
-    button{
-        font-size:16px;
-    }
-}
-
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-```
 <img src="aa.png" alt="Logo da Igreja" class="logo">
 
 <div class="card">
 
-    <h1>SETOR RESIDENCIAL SÃO BENTO</h1>
+<h1>SETOR RESIDENCIAL SÃO BENTO</h1>
 
-    <p class="subtitulo">
-        Cadastro de Visitantes
-    </p>
+<p class="subtitulo">
+Cadastro de Visitantes
+</p>
 
-    <label>Nome Completo *</label>
-    <input type="text" id="nome" required>
+<label>Nome Completo *</label>
+<input type="text" id="nome">
 
-    <label>É Cristão?</label>
-    <select id="cristao">
-        <option>Sim</option>
-        <option>Não</option>
-    </select>
+<label>É Cristão?</label>
+<select id="cristao">
+<option>Sim</option>
+<option>Não</option>
+</select>
 
-    <label>Igreja que Congrega</label>
-    <input type="text" id="igreja">
+<label>Congregação</label>
+<input type="text" id="igreja">
 
-    <label>Está com a Família?</label>
-    <select id="familia" onchange="mostrarFamilia()">
-        <option>Não</option>
-        <option>Sim</option>
-    </select>
+<label>É a primeira vez?</label>
+<select id="primeiraVez">
+<option>Sim</option>
+<option>Não</option>
+</select>
 
-    <div id="dadosFamilia" style="display:none;">
+<label>Está com a Família?</label>
+<select id="familia" onchange="mostrarFamilia()">
+<option>Não</option>
+<option>Sim</option>
+</select>
 
-        <label>Nome do Esposo(a)</label>
-        <input type="text" id="esposo">
+<div id="dadosFamilia" style="display:none;">
 
-        <label>Quantidade de Filhos</label>
-        <input type="number" id="qtdFilhos"
-               min="0"
-               onchange="gerarFilhos()">
+<label>Nome do Esposo(a)</label>
+<input type="text" id="esposo">
 
-        <div id="filhosContainer"></div>
+<label>Quantidade de Filhos</label>
+<input type="number" id="qtdFilhos" min="0" onchange="gerarFilhos()">
 
-        <label>Outros Acompanhantes
-        (Pais, Avós, Primos etc.)</label>
+<div id="filhosContainer"></div>
 
-        <input type="number"
-               id="qtdOutros"
-               min="0"
-               onchange="gerarOutros()">
+<label>Quantidade de Outros Acompanhantes</label>
+<input type="number" id="qtdOutros" min="0" onchange="gerarOutros()">
 
-        <div id="outrosContainer"></div>
+<div id="outrosContainer"></div>
 
-    </div>
+</div>
 
-    <button onclick="enviarWhatsApp()">
-        📲 Enviar Cadastro
-    </button>
+<button onclick="enviarWhatsApp()">
+Enviar Cadastro
+</button>
 
 </div>
 
 <div class="info">
-    Assembleia de Deus Min. Belém<br>
-    R. Adélia Abib, 12 - Parque São Bento<br>
-    Campinas - SP
+Assembleia de Deus Ministério Belém<br>
+R. Adélia Abib, 12 - Parque São Bento<br>
+Campinas - SP
 </div>
-```
 
 </div>
 
 <script>
 
 function mostrarFamilia(){
-
-    const familia =
-    document.getElementById("familia").value;
-
+    const familia = document.getElementById("familia").value;
     document.getElementById("dadosFamilia").style.display =
     familia === "Sim" ? "block" : "none";
 }
@@ -252,51 +224,51 @@ function enviarWhatsApp(){
     document.getElementById("nome").value;
 
     if(nome.trim() === ""){
-
         alert("Preencha o nome do visitante.");
         return;
     }
 
-    const data =
-    new Date().toLocaleDateString("pt-BR");
+    const agora = new Date();
+
+    const dataHora =
+    agora.toLocaleDateString("pt-BR") +
+    " " +
+    agora.toLocaleTimeString("pt-BR");
 
     let msg = "";
 
-    msg += "📋 CADASTRO DE VISITANTE\n\n";
+    msg += "CADASTRO DE VISITANTE\n\n";
+    msg += "Data/Hora: " + dataHora + "\n\n";
+    msg += "SETOR RESIDENCIAL SÃO BENTO\n\n";
 
-    msg += "📅 Data: " + data + "\n\n";
-
-    msg += "🏠 SETOR RESIDENCIAL SÃO BENTO\n\n";
-
-    msg += "👤 Nome: " +
+    msg += "Nome: " +
     document.getElementById("nome").value + "\n";
 
-    msg += "✝️ Cristão: " +
+    msg += "Cristão: " +
     document.getElementById("cristao").value + "\n";
 
-    msg += "⛪ Igreja: " +
+    msg += "Congregação: " +
     document.getElementById("igreja").value + "\n";
 
-    msg += "👨‍👩‍👧 Família: " +
+    msg += "Primeira vez: " +
+    document.getElementById("primeiraVez").value + "\n";
+
+    msg += "Família: " +
     document.getElementById("familia").value + "\n";
 
     if(document.getElementById("familia").value === "Sim"){
 
-        msg += "\n💍 Esposo(a): " +
+        msg += "\nEsposo(a): " +
         document.getElementById("esposo").value + "\n";
 
         document.querySelectorAll(".filho")
         .forEach((filho,i)=>{
-            msg += "👶 Filho " +
-            (i+1) + ": " +
-            filho.value + "\n";
+            msg += "Filho " + (i+1) + ": " + filho.value + "\n";
         });
 
         document.querySelectorAll(".outro")
         .forEach((outro,i)=>{
-            msg += "👥 Acompanhante " +
-            (i+1) + ": " +
-            outro.value + "\n";
+            msg += "Acompanhante " + (i+1) + ": " + outro.value + "\n";
         });
     }
 
