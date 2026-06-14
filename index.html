@@ -1,222 +1,171 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informações da Igreja</title>
+<h2 style="margin-top:20px;color:#28a745;">
+    SETOR RESIDENCIAL SÃO BENTO
+</h2>
 
-    <!-- Meta Tags para Open Graph (Facebook, WhatsApp, etc.) -->
-    <meta property="og:title" content="Versículo do Dia ✨">
-    <meta property="og:description" content="Venha nos visitar e receba uma palavra de esperança na Assembleia de Deus Min. Belém.">
-    <meta property="og:image" content="https://seusite.com/logo.png"> <!-- Coloque o link direto para o logo -->
-    <meta property="og:url" content="https://seusite.com"> <!-- Coloque o link direto para a página -->
+<div style="background:#222;padding:15px;border-radius:10px;margin-top:15px;max-width:600px;margin-left:auto;margin-right:auto;">
 
-    <!-- Meta Tags para Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Versículo do Dia ✨">
-    <meta name="twitter:description" content="Venha nos visitar e receba uma palavra de esperança na Assembleia de Deus Min. Belém.">
-    <meta name="twitter:image" content="https://seusite.com/logo.png"> <!-- Coloque o link direto para o logo -->
+    <h3>Cadastro de Visitante</h3>
 
-    <style>
-        /* Estilos CSS */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <input type="text" id="nome" placeholder="Nome Completo"
+    style="width:100%;padding:10px;margin:5px 0;">
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
+    <label>Cristão?</label>
+    <select id="cristao" style="width:100%;padding:10px;margin:5px 0;">
+        <option value="">Selecione</option>
+        <option>Sim</option>
+        <option>Não</option>
+    </select>
 
-        .container {
-            max-width: 800px;
-            width: 100%;
-            padding: 15px;
-        }
+    <input type="text" id="igreja"
+    placeholder="Igreja que congrega"
+    style="width:100%;padding:10px;margin:5px 0;">
 
-        .logo-calendar {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
+    <label>Está com a família?</label>
+    <select id="familia"
+    onchange="mostrarFamilia()"
+    style="width:100%;padding:10px;margin:5px 0;">
+        <option>Não</option>
+        <option>Sim</option>
+    </select>
 
-        .logo {
-            max-width: 180px;
-            width: 100%;
-            height: auto;
-        }
+    <div id="dadosFamilia" style="display:none;">
 
-        .schedule {
-            font-size: 0.9rem;
-            max-width: 300px;
-            text-align: left;
-        }
+        <input type="text"
+        id="esposo"
+        placeholder="Nome do esposo(a)"
+        style="width:100%;padding:10px;margin:5px 0;">
 
-        .schedule h2 {
-            text-align: center;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-            color: #28a745;
-        }
+        <input type="number"
+        id="qtdFilhos"
+        min="0"
+        placeholder="Quantidade de filhos"
+        onchange="gerarFilhos()"
+        style="width:100%;padding:10px;margin:5px 0;">
 
-        .verse {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            line-height: 1.5;
-            color: #ffdd57;
-            background-color: #333;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
-        }
+        <div id="filhosContainer"></div>
 
-        .church-info {
-            font-size: 1rem;
-            margin-top: 5px;
-        }
+        <input type="number"
+        id="qtdOutros"
+        min="0"
+        placeholder="Outros acompanhantes (pais, avós, primos, etc.)"
+        onchange="gerarOutros()"
+        style="width:100%;padding:10px;margin:5px 0;">
 
-        .church-info.small {
-            font-size: 0.85rem;
-            opacity: 0.7;
-        }
+        <div id="outrosContainer"></div>
 
-        .share-buttons {
-            margin-top: 10px;
-        }
-
-        button {
-            padding: 8px 12px;
-            font-size: 0.9rem;
-            margin: 5px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            color: white;
-            background-color: #007bff;
-        }
-
-        button:active {
-            background-color: #0056b3;
-        }
-
-        a.visit {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 12px;
-            background-color: #28a745;
-            color: white;
-            text-decoration: none;
-            font-size: 0.9rem;
-            border-radius: 5px;
-        }
-
-        a.visit:active {
-            background-color: #218838;
-        }
-
-        @media (min-width: 768px) {
-            .logo-calendar {
-                flex-direction: row;
-                justify-content: space-around;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- Versículo aleatório -->
-        <div class="verse" id="bibleVerse"></div>
-
-        <!-- Botões de Compartilhamento e Cópia -->
-        <div class="share-buttons">
-            <button onclick="shareVerse()">Compartilhar</button>
-            <button onclick="copyVerse()">Copiar Versículo</button>
-        </div>
-
-        <!-- Botão para visitar a igreja -->
-        <a class="visit" href="https://www.google.com/maps/search/?api=1&query=R.+Ad%C3%A9lia+Abib,+12+-+Conj.+Res.+Parque+Sao+Bento,+Campinas+-+SP,+13058-153" target="_blank">
-            Venha nos visitar!
-        </a>
-
-         <!-- Botão para Colaboração -->
-        <a class="visit" href="contribuicao.html">Colaboração</a> 
-        
-        <!-- Informações da Igreja -->
-        <footer class="church-info">
-            Assembleia de Deus Min. Belém
-        </footer>
-
-        <footer class="church-info small">
-            R. Adélia Abib, 12 - Conj. Res. Parque São Bento, Campinas - SP, 13058-153
-        </footer>
-
-        <!-- Logo e Calendário dos Cultos -->
-        <div class="logo-calendar">
-            <img src="aa.png" alt="Logo da Igreja" class="logo" id="churchLogo">
-
-            <div class="schedule">
-                <h2>Calendário dos Cultos da Semana</h2>
-                <p>🕒 <strong>Terça-feira:</strong> 19:30–21:00 (Culto de Ensino)</p>
-                <p>🕒 <strong>Quinta-feira:</strong> 19:30–21:00 (Culto da Família)</p>
-                <p>🕒 <strong>Domingo:</strong> 18:00–20:00 (Culto)</p>
-                <p>🕒 <strong>Primeiro sábado do mês:</strong> 18:30–21:00 (Santa Ceia)</p>
-                <p>🕒 <strong>Domingo de manhã:</strong> 09:00–10:30 (EBD - Escola Bíblica Dominical)</p>
-            </div>
-        </div>
     </div>
 
-    <script>
-        const verses = [
-            "Porque eu bem sei os planos que tenho para você, diz o Senhor, planos de fazê-los prosperar e não de causar dano, planos de dar a vocês esperança e um futuro. - Jeremias 29:11",
-            "Venham a mim, todos os que estão cansados e sobrecarregados, e eu darei descanso a vocês. - Mateus 11:28"
-            // Adicione mais versículos aqui
-        ];
+    <button onclick="enviarWhatsApp()"
+    style="width:100%;padding:12px;background:#28a745;color:white;border:none;border-radius:5px;margin-top:10px;">
+        Enviar Cadastro
+    </button>
 
-        const randomVerse = verses[Math.floor(Math.random() * verses.length)];
-        document.getElementById("bibleVerse").textContent = randomVerse;
+</div>
 
-        function shareVerse() {
-            const customMessage = `${randomVerse}\n\n📍 Assembleia de Deus Min. Belém\n💬 "Venha nos visitar e receba uma palavra de esperança!"`;
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Versículo do Dia ✨',
-                    text: customMessage,
-                    url: window.location.href
-                }).then(() => alert('Versículo compartilhado com sucesso!'))
-                .catch(error => console.error('Erro ao compartilhar:', error));
-            } else {
-                alert('Compartilhamento não suportado neste navegador.');
-            }
+<script>
+function mostrarFamilia() {
+    const familia = document.getElementById("familia").value;
+
+    document.getElementById("dadosFamilia").style.display =
+        familia === "Sim" ? "block" : "none";
+}
+
+function gerarFilhos() {
+
+    const qtd =
+        parseInt(document.getElementById("qtdFilhos").value) || 0;
+
+    const container =
+        document.getElementById("filhosContainer");
+
+    container.innerHTML = "";
+
+    for(let i = 1; i <= qtd; i++) {
+
+        container.innerHTML += `
+            <input
+            type="text"
+            class="filho"
+            placeholder="Nome do filho ${i}"
+            style="width:100%;padding:10px;margin:5px 0;">
+        `;
+    }
+}
+
+function gerarOutros() {
+
+    const qtd =
+        parseInt(document.getElementById("qtdOutros").value) || 0;
+
+    const container =
+        document.getElementById("outrosContainer");
+
+    container.innerHTML = "";
+
+    for(let i = 1; i <= qtd; i++) {
+
+        container.innerHTML += `
+            <input
+            type="text"
+            class="outro"
+            placeholder="Nome do acompanhante ${i}"
+            style="width:100%;padding:10px;margin:5px 0;">
+        `;
+    }
+}
+
+function enviarWhatsApp() {
+
+    let mensagem = "📋 CADASTRO DE VISITANTE\n\n";
+
+    mensagem += "🏠 SETOR RESIDENCIAL SÃO BENTO\n\n";
+
+    mensagem += "Nome: " +
+        document.getElementById("nome").value + "\n";
+
+    mensagem += "Cristão: " +
+        document.getElementById("cristao").value + "\n";
+
+    mensagem += "Igreja: " +
+        document.getElementById("igreja").value + "\n";
+
+    mensagem += "Com Família: " +
+        document.getElementById("familia").value + "\n";
+
+    if(document.getElementById("familia").value === "Sim") {
+
+        mensagem += "\nEsposo(a): " +
+            document.getElementById("esposo").value + "\n";
+
+        const filhos =
+            document.querySelectorAll(".filho");
+
+        if(filhos.length > 0) {
+            mensagem += "\nFILHOS:\n";
+
+            filhos.forEach((filho, index) => {
+                mensagem +=
+                    `${index + 1}. ${filho.value}\n`;
+            });
         }
 
-        function copyVerse() {
-            navigator.clipboard.writeText(randomVerse).then(() => {
-                alert('Versículo copiado!');
-            }).catch(error => console.error('Erro ao copiar:', error));
+        const outros =
+            document.querySelectorAll(".outro");
+
+        if(outros.length > 0) {
+            mensagem += "\nOUTROS ACOMPANHANTES:\n";
+
+            outros.forEach((outro, index) => {
+                mensagem +=
+                    `${index + 1}. ${outro.value}\n`;
+            });
         }
+    }
 
-        // Função para registrar acessos
-        function registerAccess() {
-            const dateTime = new Date().toLocaleString();
-            console.log(`Página acessada em: ${dateTime}`);
-            // Aqui, você pode integrar com um backend para registrar o acesso
-        }
-
-        // Registrar acesso ao carregar a página
-        window.onload = registerAccess;
-    </script>
-</body>
-</html>
-
+    window.open(
+        "https://wa.me/?text=" +
+        encodeURIComponent(mensagem),
+        "_blank"
+    );
+}
+</script>
